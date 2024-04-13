@@ -207,9 +207,9 @@ end
 --- @param xs0 string[]
 --- @return string[]
 function M.strip_cr(xs0)
-  if not is_dos(xs0) then
+  if is_dos(xs0) then
     -- don't strip, return early
-    return xs0
+    break
   end
 
   -- all lines end with '\r', need to strip
