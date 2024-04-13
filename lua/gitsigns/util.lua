@@ -191,27 +191,10 @@ function M.get_relative_time(timestamp)
   end
 end
 
---- @param xs string[]
---- @return boolean
-local function is_dos(xs)
-  -- Do not check CR at EOF
-  for i = 1, #xs - 1 do
-    if xs[i]:sub(-1) ~= '\r' then
-      return false
-    end
-  end
-  return true
-end
-
 --- Strip '\r' from the EOL of each line only if all lines end with '\r'
 --- @param xs0 string[]
 --- @return string[]
 function M.strip_cr(xs0)
-  if is_dos(xs0) then
-    -- don't strip, return early
-    break
-  end
-
   -- all lines end with '\r', need to strip
   local xs = vim.deepcopy(xs0)
   for i = 1, #xs do
