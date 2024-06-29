@@ -196,7 +196,11 @@ function M.redraw(opts)
   if vim.fn.has('nvim-0.10') == 1 then
     vim.api.nvim__redraw(opts)
   else
-    vim.api.nvim__buf_redraw(opts.buf, opts.range[1], opts.range[2])
+    if vim.api.nvim__buf_redraw then
+      vim.api.nvim__buf_redraw(opts.buf, opts.range[1], opts.range[2])
+    else
+      vim.api.nvim__buf_redraw_range(opts.buf, opts.range[1], opts.range[2])
+    end
   end
 end
 
